@@ -46,6 +46,7 @@ public class NodeZookeeperClient {
         this.latch.await();
         //没有节点信息的话，就开始创建节点信息
         try {
+            //在PUSH节点下，下载projectName
             if (!this.curatorClient.isPathExist(this.projectName)) {
                 this.curatorClient.createPath(this.projectName, CreateMode.PERSISTENT);
                 this.curatorClient.writePath(this.projectName, "");
@@ -57,6 +58,8 @@ public class NodeZookeeperClient {
 
     public boolean confRegiste(NodeInfo node, boolean addSet) {
         String path = this.projectName + "/" + node.getClassName() + "." + node.getParamName();
+        //以后项目部署到多个服务器的话，需要加ip来进行区分的操作
+        //PUSH/projectName/className.methodName/ip
         String ippath = path + "/" + this.ip;
         if ((addSet) && (this.confSet.contains(node))) {
             logger.error("重复注册节点", node);
@@ -64,6 +67,7 @@ public class NodeZookeeperClient {
         }
 
         try {
+            //算是根节点吧，项目的节点信息
             if (!this.curatorClient.isPathExist(path)) {
                 this.curatorClient.createPath(path, CreateMode.PERSISTENT);
                 this.curatorClient.writePath(path, node.getValue());
@@ -72,7 +76,6 @@ public class NodeZookeeperClient {
                 if (!value.equals(node.getValue())) {
                     ReflectionUtils.writeField(node.getParamName(), node, value);
                     node.setValue(value);
-
                 }
             }
 
@@ -83,6 +86,7 @@ public class NodeZookeeperClient {
             this.curatorClient.writePath(ippath, node.getValue());
             this.curatorClient.watcherPath(ippath,
                 new PushIpWatcher(this, node.getObject(), node.getParamName(), false));
+            //添加到集合中，下次进行重复添加判断的操作
             if (addSet) {
                 this.confSet.add(node);
             }
