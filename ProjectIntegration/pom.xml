@@ -4,6 +4,11 @@
 	<groupId>com.zhou.project.test</groupId>
 	<artifactId>ProjectIntegration</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<parent>
+		<groupId>com.zhou.project.test</groupId>
+		<artifactId>project</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
 	<properties>
 		<spring_version>3.2.9.RELEASE</spring_version>
 		<!-- Log libs -->
@@ -123,7 +128,11 @@
 			<version>${spring_version}</version>
 			<scope>test</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.0.12</version>
+		</dependency>
 		<dependency>
 			<groupId>c3p0</groupId>
 			<artifactId>c3p0</artifactId>
