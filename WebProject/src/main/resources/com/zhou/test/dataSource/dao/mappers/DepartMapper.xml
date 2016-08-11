@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.zhou.test.dataSource.dao.mappers.DepartMapper">
+	<resultMap type="com.zhou.test.dataSource.dao.domain.Depart"
+		id="departResult">
+		<id column="DEPNO" property="depNo" />
+		<result column="DEPNAME" property="depName" />
+		<result column="DEPMAN" property="depMan" />
+	</resultMap>
+
+	<sql id="baseColumns">
+		DEPNO, DEPNAME, DEPMAN
+	</sql>
+
+
+	<insert id="insertDepart" parameterType="com.zhou.test.dataSource.dao.domain.Depart">
+		INSERT INTO DEPART(
+		<include refid="baseColumns" />
+		)
+		VALUES(#{depNo}, #{depName}, #{depMan})
+	</insert>
+
+
+</mapper>

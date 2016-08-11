@@ -4,12 +4,10 @@
 
 <web-app>
 	<display-name>webProject</display-name>
-
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:application-context.xml</param-value>
 	</context-param>
-
 	<!-- 字符集过滤器 -->
 	<filter>
 		<filter-name>characterEncodingFilter</filter-name>
