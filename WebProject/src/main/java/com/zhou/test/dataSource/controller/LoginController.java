@@ -38,7 +38,6 @@ public class LoginController {
     }
 
     class task implements Runnable {
-        @Override
         public void run() {
             Depart depart = new Depart();
             depart.setDepMan("haha");

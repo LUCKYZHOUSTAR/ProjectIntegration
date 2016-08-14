@@ -31,9 +31,8 @@ public class logLevelPush {
     private NodeZookeeperClient nodeZookeeperClient;
 
     public void init() {
-        NodeInfo logLevelNode = new NodeInfo(this, "logLevelConfig", "this.logLevelConfig");
+        NodeInfo logLevelNode = new NodeInfo(this, "logLevelConfig", this.logLevelConfig);
         this.nodeZookeeperClient.confRegiste(logLevelNode, true);
-
     }
 
     /**
